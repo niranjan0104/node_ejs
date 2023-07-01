@@ -1,0 +1,47 @@
+<%- include('layout/header') %>
+
+<div class="container">
+    <% if (message) { %>
+     <div class="alert alert-dismissible fade show alert-<%= message.type %>">
+        <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close">
+        </button>
+        <strong><%= message.message %></strong>
+     </div>
+    <% } %>
+    <div class="row">
+        <% if (users && users.length) { %>
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr class="table-dark">
+                    <th scope="col">ID</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach((user, i) => { %>
+                        <tr class="align-middle">
+                            <th scope="row"><%= i+1 %></th>
+                            <td><img width="70" height="70" src="<%= user.image %>" alt="image" s></td>
+                            <td><%= user.name %></td>
+                            <td><%= user.email %></td>
+                            <td><%= user.phone %></td>
+                            <td>
+                                <a href="/editUser/<%= user._id %>" class="text-success"><i class="fas fa-edit fa-lg"></i></a>
+                                <a href="/deleteUser/<%= user._id %>" class="text-danger"><i class="fa fa-trash fa-lg"></i></a>
+                            </td>
+                          </tr>
+                    <% }) %>
+                </tbody>
+              </table>
+        <% } else { %>
+            <h1 class="text-center">No record found</h1>
+            <% } %>
+    </div>
+</div>
+
+
+<%- include('layout/footer') %>
